@@ -4,6 +4,8 @@ use App\Http\Controllers\ManageCars;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\RentalController;
 use App\Http\Controllers\Admin\CarController;
+use App\Http\Controllers\Controller;
+use App\Http\Controllers\Frontend\CarControllerF;
 use App\Http\Controllers\Frontend\PageController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Rental;
@@ -21,6 +23,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [PageController::class, 'home'])->name('home');
+Route::get('/book_a_car', [PageController::class, 'book_a_car'])->name('book_a_car');
 
 
 // Route::get('/cars/list', function () {
@@ -28,9 +31,13 @@ Route::get('/', [PageController::class, 'home'])->name('home');
 //     return view('cars.list', compact('cars'));
 // });
 
-Route::get('/dashboard', function () {
-    return view('customer.dashboard');
-})->middleware(['auth', 'role:customer'])->name('dashboard');
+// customer routes
+Route::middleware(['auth', 'role:customer'])->group(function () {
+    Route::get('/dashboard', [Controller::class, 'dashboard'])->name('dashboard');
+    Route::post('/check_availability', [CarControllerF::class, 'check_availability'])->name('check_availability');
+    Route::get('/car_details/{car_id}/{start_date}/{end_date}', [CarControllerF::class, 'car_details'])->name('car_details');
+    Route::post('/confirm_booking', [CarControllerF::class, 'confirm_booking'])->name('confirm_booking');
+});
 
 // Admin Routes
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {

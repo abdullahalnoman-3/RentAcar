@@ -13,4 +13,8 @@ class PageController extends Controller
         $cars = Car::all();
         return view('welcome', compact('cars'));
     }
+
+    function book_a_car(){
+        return view('book_a_car');
+    }
 }
