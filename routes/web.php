@@ -31,7 +31,7 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
     return view('customer.dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth', 'role:customer'])->name('dashboard');
 
 // Admin Routes
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
