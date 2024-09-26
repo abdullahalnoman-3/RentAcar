@@ -3,11 +3,20 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Models\User;
 
 class CustomerController extends Controller
 {
-    function customers(){
-        return view('admin.customers');
+    public function customers()
+    {
+        // কেবলমাত্র 'customer' role এর ইউজারদের ডাটা আনা হবে
+        $customers = User::where('role', 'customer')->get();
+
+        // গ্রাহকদের তথ্য ভিউতে পাঠানো হচ্ছে
+        return view('admin.customers', compact('customers'));
     }
+    
+
+
+   
 }

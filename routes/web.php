@@ -47,7 +47,14 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::delete('/car/{id}', [CarController::class, 'destroy'])->name('car.destroy');
 
     Route::get('/rentals', [RentalController::class, 'rentals'])->name('rentals');
+
+    //customer
+    Route::get('/customers', [CustomerController::class, 'customers'])->name('customers.index');
     Route::get('/customers', [CustomerController::class, 'customers'])->name('customers');
+
+    //rental
+    Route::get('/rentals', [RentalController::class, 'rentals'])->name('rentals');
+    
 });
 
 // Profile Routes

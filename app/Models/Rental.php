@@ -14,9 +14,9 @@ class Rental extends Model
     protected $fillable = [
         'car_id',     // গাড়ির সাথে সম্পর্কিত foreign key
         'user_id',    // ইউজারের সাথে সম্পর্কিত foreign key
-        'rental_date',
-        'return_date',
-        'price',
+        'start_date',
+        'end_date',
+        'total_cost',
         'status',
     ];
 
