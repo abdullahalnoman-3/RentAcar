@@ -58,7 +58,7 @@ class CarController extends Controller
         ]);
 
        
-        return redirect()->route('cars.index')->with('success', 'গাড়ি সফলভাবে যোগ করা হয়েছে!');
+        return redirect()->route('admin.cars.index')->with('success', 'গাড়ি সফলভাবে যোগ করা হয়েছে!');
     }
 
    
