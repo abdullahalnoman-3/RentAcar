@@ -11,10 +11,29 @@
     <style>
         /* Custom styles for car rental system */
         .hero {
-            background: url('https://images.unsplash.com/photo-1511407397940-d57f68e81203?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDJ8fGNhcnN8ZW58MHx8fHwxNjA1MzA1OTYy&ixlib=rb-1.2.1&q=80&w=1080') no-repeat center center/cover;
+            position: relative;
+            background: url('https://images.unsplash.com/photo-1484136063621-1acbc3b4ec98?q=80&w=2553&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center/cover;
             color: white;
             padding: 100px 0;
             text-align: center;
+        }
+
+        /* Black overlay */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5); /* 50% opacity black overlay */
+            z-index: 1;
+        }
+
+        /* Text styling (above overlay) */
+        .hero-content {
+            position: relative;
+            z-index: 2;
         }
 
         .hero h1 {
@@ -83,7 +102,7 @@
 
     <!-- Hero Section -->
     <section class="hero">
-        <div class="container">
+        <div class="container hero-content">
             <h1>Welcome to Car Rental System</h1>
             <p>Find the perfect car for your journey at an affordable price!</p>
             <a href="#cars" class="btn btn-primary btn-lg">Explore Our Cars</a>
