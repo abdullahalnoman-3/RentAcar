@@ -83,7 +83,11 @@
                     @else
                         <!-- If the user is logged in -->
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('dashboard') }}">Dashboard</a>
+                            @if (Auth::user()->role=="admin")
+                                <a class="nav-link" href="{{ route('admin.dashboard') }}">Dashboard</a>
+                            @else
+                                <a class="nav-link" href="{{ route('dashboard') }}">Dashboard</a>
+                            @endif
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('logout') }}"
@@ -114,35 +118,19 @@
         <div class="container">
             <h2 class="text-center mb-5">Our Cars</h2>
             <div class="row">
-                <!-- Car 1 -->
-                <div class="col-md-4">
-                    <div class="car-card p-3">
-                        <img src="https://images.unsplash.com/photo-1542362567-b07e54358753?ixid=MnwzNjUyOXwwfDF8c2VhcmNofDF8fGhvbmRhJTIwY2l2aWN8ZW58MHx8fHwxNjg2NTczMjg5&ixlib=rb-1.2.1&auto=format&fit=crop&w=1080&q=60" class="img-fluid" alt="Honda Civic">
-                        <h5>Honda Civic</h5>
-                        <p>Price: $60/day</p>
-                        <a href="#" class="btn btn-success">Book Now</a>
-                    </div>
-                </div>
+                
 
-                <!-- Car 2 -->
-                <div class="col-md-4">
-                    <div class="car-card p-3">
-                        <img src="https://images.unsplash.com/photo-1502877338535-766e1452684a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDZ8fGZvcmQlMjBtdXN0YW5nfGVufDB8fHx8MTY4NjU3MzQyMA&ixlib=rb-1.2.1&q=80&w=1080" class="img-fluid" alt="Toyota Corolla">
-                        <h5>Toyota Corolla</h5>
-                        <p>Price: $50/day</p>
-                        <a href="#" class="btn btn-success">Book Now</a>
+                @foreach ($cars as $car)
+                    <div class="col-md-4">
+                        <div class="car-card p-3">
+                            <img src="{{ asset('images/' . $car->image) }}" alt="{{ $car->name }}" class="img-fluid" style="height: 300px;">
+                            <h5>{{$car->name}}</h5>
+                            <p>Price: ${{$car->daily_rent_price}}/day</p>
+                            <a href="#" class="btn btn-success">Book Now</a>
+                        </div>
                     </div>
-                </div>
-
-                <!-- Car 3 -->
-                <div class="col-md-4">
-                    <div class="car-card p-3">
-                        <img src="https://images.unsplash.com/photo-1502877338535-766e1452684a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDZ8fGZvcmQlMjBtdXN0YW5nfGVufDB8fHx8MTY4NjU3MzQyMA&ixlib=rb-1.2.1&q=80&w=1080" class="img-fluid" alt="Ford Mustang">
-                        <h5>Ford Mustang</h5>
-                        <p>Price: $120/day</p>
-                        <a href="#" class="btn btn-success">Book Now</a>
-                    </div>
-                </div>
+                @endforeach
+                
             </div>
         </div>
     </section>
