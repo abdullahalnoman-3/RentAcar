@@ -1,13 +1,3 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"  crossorigin="anonymous">
-  </head>
-  <body>
-
 <x-app-layout>
     <x-slot name="header">
         <div class="flex items-center justify-between">
@@ -15,7 +5,7 @@
                 {{ __('Car List') }}
             </h2>
             <a href="{{ route('admin.car.create') }}" class="btn btn-primary">
-                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                <button class="">
                     Add New Car
                 </button>
             </a>
@@ -25,7 +15,7 @@
     
 
     <div class="container mx-auto px-4 py-8">
-        <h1 class="text-2xl font-bold mb-4">Cars List</h1>
+        
 
 
         @if (session('success'))
@@ -85,7 +75,3 @@
     </x-slot>
 </x-app-layout>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"  crossorigin="anonymous"></script>
-</body>
-
-</html>
