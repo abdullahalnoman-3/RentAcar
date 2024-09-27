@@ -18,7 +18,7 @@ class CarController extends Controller
    
     public function create()
     {
-        return view('admin.carEntry');  // carEntry.blade.php ফাইলটি return করবে
+        return view('admin.carEntry');  
     }
 
 
@@ -37,7 +37,7 @@ class CarController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        // ফাইল আপলোড করা (যদি থাকে)
+       
         if ($request->hasFile('image')) {
             $imageName = time() . '.' . $request->image->extension();
             $request->image->move(public_path('images'), $imageName);

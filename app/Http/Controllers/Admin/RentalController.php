@@ -10,10 +10,10 @@ class RentalController extends Controller
 {
     public function rentals()
     {
-        // Rentals টেবিল থেকে সমস্ত ডাটা নিয়ে আসা
+        
         $rentals = Rental::with(['user', 'car'])->get();
 
-        // ডাটা ভিউতে পাঠানো
+        
         return view('admin.rentals', compact('rentals'));
     }
 

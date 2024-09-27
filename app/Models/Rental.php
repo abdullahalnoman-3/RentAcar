@@ -12,21 +12,21 @@ class Rental extends Model
     protected $table = 'rentals';
 
     protected $fillable = [
-        'car_id',     // গাড়ির সাথে সম্পর্কিত foreign key
-        'user_id',    // ইউজারের সাথে সম্পর্কিত foreign key
+        'car_id',     
+        'user_id',    
         'start_date',
         'end_date',
         'total_cost',
         'status',
     ];
 
-    // Define the belongsTo relationship with the Car model
+    
     public function car()
     {
         return $this->belongsTo(Car::class);
     }
 
-    // Define the belongsTo relationship with the User model
+    
     public function user()
     {
         return $this->belongsTo(User::class);

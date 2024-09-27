@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 26, 2024 at 09:01 AM
+-- Generation Time: Sep 27, 2024 at 08:14 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -46,8 +46,16 @@ CREATE TABLE `cars` (
 --
 
 INSERT INTO `cars` (`id`, `name`, `brand`, `model`, `year`, `car_type`, `daily_rent_price`, `availability`, `image`, `created_at`, `updated_at`) VALUES
-(5, 'lancruser2', 'toyota', '2023', 2023, 'SUV', 10000.00, 1, '1727286768.jpg', '2024-09-25 11:52:48', '2024-09-25 23:51:11'),
-(6, 'hiace', 'toyota', '2', 2024, 'Sedan', 47.00, 1, '1727288225.jpg', '2024-09-25 12:17:05', '2024-09-25 12:41:04');
+(5, 'lancruser2', 'toyota', '2023', 2023, 'SUV', 10.00, 1, '1727286768.jpg', '2024-09-25 11:52:48', '2024-09-25 23:51:11'),
+(6, 'hiace', 'ford', '2', 2024, 'Sedan', 47.00, 1, '1727288225.jpg', '2024-09-25 12:17:05', '2024-09-25 12:41:04'),
+(12, 'suv', 'toyota', '2024', 2024, 'Sedan', 100.00, 1, '1727342276.jpg', '2024-09-26 03:17:56', '2024-09-26 03:17:56'),
+(13, 'hybrid', 'Tata', '2024', 2024, 'Sedan', 100.00, 1, '1727414550.jpg', '2024-09-26 23:22:30', '2024-09-26 23:22:30'),
+(14, 'egdhfgj', 'toyota', '2024', 2024, 'Coupe', 300.00, 0, '1727414625.jpg', '2024-09-26 23:23:45', '2024-09-26 23:23:45'),
+(15, 'lancruser2', 'ford', '2023', 2023, 'SUV', 10.00, 1, '1727286768.jpg', '2024-09-25 11:52:48', '2024-09-25 23:51:11'),
+(16, 'hiace', 'bmw', '2', 2024, 'Sedan', 47.00, 1, '1727288225.jpg', '2024-09-25 12:17:05', '2024-09-25 12:41:04'),
+(17, 'suv', 'bmw', '2024', 2024, 'Sedan', 100.00, 1, '1727342276.jpg', '2024-09-26 03:17:56', '2024-09-26 03:17:56'),
+(18, 'hybrid', 'Tata', '2024', 2024, 'Sedan', 100.00, 1, '1727414550.jpg', '2024-09-26 23:22:30', '2024-09-26 23:22:30'),
+(19, 'egdhfgj', 'toyota', '2024', 2024, 'Coupe', 300.00, 0, '1727414625.jpg', '2024-09-26 23:23:45', '2024-09-26 23:23:45');
 
 -- --------------------------------------------------------
 
@@ -88,7 +96,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (4, '2019_12_14_000001_create_personal_access_tokens_table', 1),
 (5, '2024_09_25_112328_create_cars_table', 2),
 (6, '2024_09_25_112400_create_rentals_table', 2),
-(7, '2024_09_26_043825_add_role_column_to_users_table', 3);
+(7, '2024_09_26_043825_add_role_column_to_users_table', 3),
+(8, '2024_09_26_172926_add_status_to_rentals_table', 4);
 
 -- --------------------------------------------------------
 
@@ -134,9 +143,18 @@ CREATE TABLE `rentals` (
   `start_date` date NOT NULL,
   `end_date` date NOT NULL,
   `total_cost` decimal(10,2) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `status` varchar(255) NOT NULL DEFAULT 'Ongoing',
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `rentals`
+--
+
+INSERT INTO `rentals` (`id`, `user_id`, `car_id`, `start_date`, `end_date`, `total_cost`, `status`, `created_at`, `updated_at`) VALUES
+(14, 6, 6, '2024-10-02', '2024-10-05', 141.00, 'Ongoing', '2024-09-27 10:49:05', '2024-09-27 10:49:05'),
+(15, 6, 5, '2024-10-11', '2024-10-12', 10.00, 'Canceled', '2024-09-27 11:32:48', '2024-09-27 11:34:06');
 
 -- --------------------------------------------------------
 
@@ -161,9 +179,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `role`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'admin', 'admin@gmail.com', NULL, '$2y$12$ZONCT4XsKICgyI6Yzv3zl.0E84JPQmH839Nd8awIi.QsGyS0yEtZ2', NULL, '2024-09-24 14:10:58', '2024-09-24 14:10:58'),
+(1, 'admin', 'admin', 'admin@gmail.com', NULL, '$2y$12$oF3jJd9fISpgT4U5kR5TOeotXMFTOpSzdw12ox381g88w2wbyY.i.', NULL, '2024-09-24 14:10:58', '2024-09-27 11:06:06'),
 (3, 'user', 'customer', 'user@gmail.com', NULL, '$2y$12$MFmg80FYrYCV1n3xOW1FJOMo1qQB6eK9yvK.sZHUFZywohKvYImzO', NULL, '2024-09-25 22:27:36', '2024-09-25 22:27:36'),
-(4, 'poll', 'customer', 'wrwe@hfhf', NULL, '$2y$12$.ZRXRR3uVRYVTANVICyBo.C4HZAWmugIqdyukkvvrI9B8MMIQh7P6', NULL, '2024-09-25 22:41:25', '2024-09-25 22:41:25');
+(6, 'Anik', 'customer', 'abdulaalnomanbd100@gmail.com', NULL, '$2y$12$V5HnEaF2gY04SOmpBUmmjeFPuc8O8s0VfYBGCY5O9oYmtMHfDmQAm', NULL, '2024-09-27 09:15:02', '2024-09-27 11:03:28');
 
 --
 -- Indexes for dumped tables
@@ -225,7 +243,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `cars`
 --
 ALTER TABLE `cars`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -237,7 +255,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -249,13 +267,13 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `rentals`
 --
 ALTER TABLE `rentals`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables

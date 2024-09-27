@@ -12,7 +12,7 @@ class RentalControllerF extends Controller
 {
     public function showUserBookings($id)
     {
-        // নিশ্চিত করুন যে শুধুমাত্র নিজস্ব বুকিং দেখা যায়
+        
         if (Auth::id() != $id) {
             abort(403); // Unauthorized access
         }
@@ -29,10 +29,10 @@ class RentalControllerF extends Controller
     {
         $user = Auth::user();
 
-        // ইউজারের বুকিং ডেটা সংগ্রহ করা
+        
         $bookings = Rental::where('user_id', $user->id)->with('car')->get();
 
-        // ভিউতে ডেটা পাঠানো
+        
         return view('customer.dashboard', compact('user', 'bookings'));
     }
 
@@ -43,11 +43,11 @@ class RentalControllerF extends Controller
 {
     $booking = Rental::find($id);
 
-    // যদি বুকিং পাওয়া যায় এবং বর্তমান ইউজারের হয় এবং স্ট্যাটাস ক্যানসেল নয়
+    
     if ($booking && $booking->user_id == Auth::id() && $booking->status != 'Canceled') {
-        // চেক করুন বুকিং শুরুর তারিখ বর্তমান তারিখের আগে কিনা
+        
         if (now()->lessThan($booking->start_date)) {
-            // বুকিং ক্যানসেল করা হবে
+            
             $booking->status = 'Canceled';
             $booking->save();
 

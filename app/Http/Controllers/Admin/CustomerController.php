@@ -9,10 +9,10 @@ class CustomerController extends Controller
 {
     public function customers()
     {
-        // কেবলমাত্র 'customer' role এর ইউজারদের ডাটা আনা হবে
+        
         $customers = User::where('role', 'customer')->get();
 
-        // গ্রাহকদের তথ্য ভিউতে পাঠানো হচ্ছে
+        
         return view('admin.customers', compact('customers'));
     }
     

@@ -13,7 +13,7 @@ class CarControllerF extends Controller
 {
     public function check_availability(Request $request)
     {
-        // Validate the request data
+        
         $request->validate([
             'brand' => 'required|string',
             'price_range' => 'required|string',
@@ -24,12 +24,12 @@ class CarControllerF extends Controller
         $startDate = $request->start_date;
         $endDate = $request->end_date;
 
-        // Parse price range
+        
         list($minPrice, $maxPrice) = explode('-', $request->price_range);
 
-        // Find available cars based on start_date and end_date
+        
         $availableCars = Car::where('brand', $request->brand)
-            ->whereBetween('daily_rent_price', [(int)$minPrice, (int)$maxPrice]) // Price range filtering
+            ->whereBetween('daily_rent_price', [(int)$minPrice, (int)$maxPrice]) 
             ->whereDoesntHave('rentals', function ($query) use ($startDate, $endDate) {
                 $query->where(function ($q) use ($startDate, $endDate) {
                     $q->whereBetween('start_date', [$startDate, $endDate])
@@ -42,7 +42,7 @@ class CarControllerF extends Controller
             })
             ->get();
 
-        // Return available cars
+       
         return view('book_a_car', compact('availableCars', 'startDate', 'endDate'));
     }
 
@@ -53,11 +53,11 @@ class CarControllerF extends Controller
         $startDate = $request->start_date;
         $endDate = $request->end_date;
 
-        // Get car details by car_id
+        
         $car = Car::findOrFail($car_id);
 
 
-            // Check if the car is available for the provided start and end date
+          
             $isAvailable = !$car->rentals()->where(function($query) use ($startDate, $endDate) {
                 $query->where(function ($q) use ($startDate, $endDate) {
                     $q->whereBetween('start_date', [$startDate, $endDate])
@@ -69,7 +69,7 @@ class CarControllerF extends Controller
                 });
             })->exists();
 
-        // Pass the car details and availability status to the view
+        
         return view('car_details', compact('car', 'isAvailable', 'startDate', 'endDate'));
     }
 
