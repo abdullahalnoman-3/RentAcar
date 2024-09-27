@@ -2,23 +2,16 @@
 
 namespace App\Mail;
 
-use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
-use Illuminate\Queue\SerializesModels;
 
 class BookingConfirmedMail extends Mailable
 {
-    use Queueable, SerializesModels;
-
     public $booking;
 
     /**
      * Create a new message instance.
-     *
-     * @return void
      */
     public function __construct($booking)
     {
@@ -26,16 +19,33 @@ class BookingConfirmedMail extends Mailable
     }
 
     /**
-     * Build the message.
-     *
-     * @return $this
+     * Get the message envelope.
      */
-    public function build()
+    public function envelope()
     {
-        return $this->view('emails.booking-confirmed')
-                    ->subject('Booking Confirmation')
-                    ->with([
-                        'booking' => $this->booking,
-                    ]);
+        return new Envelope(
+            subject: 'Booking Confirmation',
+        );
+    }
+
+    /**
+     * Get the message content definition.
+     */
+    public function content()
+    {
+        return new Content(
+            view: 'emails.booking-confirmed',
+            with: [
+                'booking' => $this->booking,
+            ],
+        );
+    }
+
+    /**
+     * Get the attachments for the message.
+     */
+    public function attachments()
+    {
+        return [];
     }
 }

@@ -21,7 +21,7 @@ class BookingController extends Controller
         $booking->save();
 
         // মেইল 
-        Mail::to(auth()->user()->email)->send(new BookingConfirmedMail($booking));
+        Mail::to($booking->user->email)->send(new BookingConfirmedMail($booking));
 
         return redirect()->back()->with('success', 'Booking completed and email sent.');
     }

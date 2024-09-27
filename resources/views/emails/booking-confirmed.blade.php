@@ -4,16 +4,15 @@
     <title>Booking Confirmation</title>
 </head>
 <body>
-    <h1>Dear {{ $booking->user->name }},</h1>
-    <p>Thank you for booking a car with us.</p>
-    <p>Here are the details of your booking:</p>
+    <h1>প্রিয় {{ $booking->user->name }},</h1>
+    <p>আপনার বুকিংয়ের জন্য ধন্যবাদ। নিচে আপনার বুকিংয়ের বিবরণ দেওয়া হলো:</p>
     <ul>
-        <li>Car: {{ $booking->car->model }}</li>
-        <li>Start Date: {{ $booking->start_date }}</li>
-        <li>End Date: {{ $booking->end_date }}</li>
-        <li>Total Cost: ${{ $booking->total_cost }}</li>
+        <li><strong>গাড়ি:</strong> {{ $booking->car->model }}</li>
+        <li><strong>শুরুর তারিখ:</strong> {{ $booking->start_date }}</li>
+        <li><strong>শেষ তারিখ:</strong> {{ $booking->end_date }}</li>
+        <li><strong>মোট খরচ:</strong> ${{ $booking->total_cost }}</li>
     </ul>
-    <p>If you have any questions, feel free to contact us.</p>
-    <p>Thank you!</p>
+    <p>আপনার যদি কোনো প্রশ্ন থাকে, অনুগ্রহ করে আমাদের সাথে যোগাযোগ করুন।</p>
+    <p>ধন্যবাদ!</p>
 </body>
 </html>
