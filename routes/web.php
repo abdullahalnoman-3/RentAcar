@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\RentalController;
 use App\Http\Controllers\Admin\CarController;
 use App\Http\Controllers\Admin\DashboardControllerAdm;
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Frontend\CarControllerF;
 use App\Http\Controllers\Frontend\PageController;
@@ -31,7 +32,8 @@ Route::get('/book_a_car', [PageController::class, 'book_a_car'])->name('book_a_c
 
 Route::patch('/bookings/cancel/{id}', [RentalControllerF::class, 'cancelBooking'])->name('bookings.cancel');
 
-
+//mail
+Route::post('/bookings', [BookingController::class, 'store'])->name('bookings.store');
 
 
 

@@ -132,6 +132,7 @@
                                     <option value="honda">Honda</option>
                                     <option value="bmw">BMW</option>
                                     <option value="ford">Ford</option>
+                                    <option value="ford">Tata</option>
                                     <!-- Add more options as necessary -->
                                 </select>
                             </div>
@@ -146,7 +147,7 @@
                                     <option value="1-50">$1 - $50/day</option>
                                     <option value="51-100">$51 - $100/day</option>
                                     <option value="101-150">$101 - $150/day</option>
-                                    <option value="151-200">$151 - $200/day</option>
+                                    <option value="151-200">$151 - /day</option>
                                 </select>
                             </div>
                         </div>

@@ -28,24 +28,26 @@
 <!-- Bookings Table Outside Card -->
 <div class="container mt-4">
     <h5>Current and Past Bookings</h5>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Car Model</th>
-                <th>Start Date</th>
-                <th>End Date</th>
-                <th>Status</th>
-                <th>Action</th>
-            </tr>
-        </thead>
+    <br>
+    
+    <table class="table table-striped table-bordered">
+    <thead class="">
+        <tr>
+            <th class="text-center text-primary bg-dark" style="width: 20%;">Car Model</th>
+            <th class="text-center text-primary bg-dark" style="width: 20%;">Start Date</th>
+            <th class="text-center text-primary bg-dark" style="width: 20%;">End Date</th>
+            <th class="text-center text-primary bg-dark" style="width: 20%;">Status</th>
+            <th class="text-center text-primary bg-dark" style="width: 20%;">Action</th>
+        </tr>
+    </thead>
         <tbody>
             @foreach ($bookings as $booking)
                 <tr>
-                    <td>{{ $booking->car->model }}</td>
-                    <td>{{ $booking->start_date }}</td>
-                    <td>{{ $booking->end_date }}</td>
-                    <td>{{ $booking->status }}</td>
-                    <td>
+                    <td class="text-center" style="width: 20%;">{{ $booking->car->model }}</td>
+                    <td class="text-center" style="width: 20%;">{{ $booking->start_date }}</td>
+                    <td class="text-center" style="width: 20%;">{{ $booking->end_date }}</td>
+                    <td class="text-center" style="width: 20%;">{{ $booking->status }}</td>
+                    <td class="text-center" style="width: 20%;">
                         <!-- Cancel Button -->
                         @if ($booking->status != 'Canceled')
                             <form action="{{ route('bookings.cancel', $booking->id) }}" method="POST">
