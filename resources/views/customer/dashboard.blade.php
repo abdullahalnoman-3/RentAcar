@@ -1,6 +1,6 @@
 <!-- resources/views/customer/dashboard.blade.php -->
 
-<x-app-layout>
+<x-user-app-layout>
     <!-- Header Slot -->
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -76,4 +76,4 @@
 
 
     </x-slot>
-</x-app-layout>
+</x-user-app-layout>
