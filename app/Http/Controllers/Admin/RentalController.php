@@ -16,4 +16,6 @@ class RentalController extends Controller
         // ডাটা ভিউতে পাঠানো
         return view('admin.rentals', compact('rentals'));
     }
+
+   
 }
