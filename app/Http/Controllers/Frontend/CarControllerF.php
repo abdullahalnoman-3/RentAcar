@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Mail\BookingConfirmedMail;
 use App\Models\Car;
 use App\Models\Rental;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class CarControllerF extends Controller
 {
@@ -73,20 +75,21 @@ class CarControllerF extends Controller
 
 
     public function confirm_booking(Request $request)
+    
     {
-        
+        // বুকিং 
+        $booking = new Rental();
+        $booking->user_id = auth()->id();
+        $booking->car_id = $request->car_id;
+        $booking->start_date = $request->start_date;
+        $booking->end_date = $request->end_date;
+        $booking->total_cost = $request->total_cost;
+        $booking->save();
 
-        // Create the booking in the rentals table
-        $rental = Rental::create([
-            'car_id' => $request->car_id,
-            'user_id' => $request->user_id,
-            'start_date' => $request->start_date,
-            'end_date' => $request->end_date,
-            'total_cost' => $request->total_cost,
-        ]);
+        // মেইল 
+        Mail::to($booking->user->email)->send(new BookingConfirmedMail($booking));
 
-        // Redirect with a success message
-        return redirect()->route('dashboard')->with('success', 'Your booking has been confirmed!');
+        return redirect()->route('dashboard')->with('success', 'Booking completed and email sent.');
     }
 
 

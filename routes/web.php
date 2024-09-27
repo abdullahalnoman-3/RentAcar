@@ -39,7 +39,7 @@ Route::post('/bookings', [BookingController::class, 'store'])->name('bookings.st
 
 // customer routes
 Route::middleware(['auth', 'role:customer'])->group(function () {
-    Route::get('/dashboard', [Controller::class, 'dashboard'])->name('dashboard');
+    // Route::get('/dashboard', [Controller::class, 'dashboard'])->name('dashboard');
     Route::get('/dashboard', [RentalControllerF::class, 'dashboard'])->name('dashboard');
 
     

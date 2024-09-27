@@ -6,9 +6,15 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Customer Dashboard') }}
         </h2>
-    
+        @if (session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        @endif
 
- <!-- Main Content -->
 <!-- Main Content -->
 <div class="d-flex justify-content-center py-12">
     <!-- User Profile Card -->
@@ -33,6 +39,7 @@
     <table class="table table-striped table-bordered">
     <thead class="">
         <tr>
+            <th class="text-center text-primary bg-dark" style="width: 20%;">Car Name</th>
             <th class="text-center text-primary bg-dark" style="width: 20%;">Car Model</th>
             <th class="text-center text-primary bg-dark" style="width: 20%;">Start Date</th>
             <th class="text-center text-primary bg-dark" style="width: 20%;">End Date</th>
@@ -43,6 +50,7 @@
         <tbody>
             @foreach ($bookings as $booking)
                 <tr>
+                    <td class="text-center" style="width: 20%;">{{ $booking->car->name }}</td>
                     <td class="text-center" style="width: 20%;">{{ $booking->car->model }}</td>
                     <td class="text-center" style="width: 20%;">{{ $booking->start_date }}</td>
                     <td class="text-center" style="width: 20%;">{{ $booking->end_date }}</td>
